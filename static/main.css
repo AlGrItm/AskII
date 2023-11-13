@@ -1,0 +1,233 @@
+main > .container {
+    padding: 60px 15px 0;
+  }
+
+  .avatar {
+    border-radius: 10px;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+
+  li {
+    margin-left: 20px;
+    list-style-type: none;
+  }
+
+  /* Split the screen in half */
+.split {
+  margin-top: 45px;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  width: 70%;
+  left: 0;
+  background-color: #ffffff;
+}
+
+/* Control the right side */
+.right {
+  width: 30%;
+  right: 0;
+  background-color: #f2f3f4;
+}
+
+.wrapper {
+  display: flex;
+  text-align: center;
+  margin: auto;
+}
+
+.NIZ {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ser {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.question {
+  background-color: #f2f3f4;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  width: 900px;
+  display: inline-table;
+  height: auto;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.questionPhoto {
+  float: left;
+  margin: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border: 1px solid #000000;
+}
+
+.questionHref {
+  margin-top: 10px;
+  margin-left: 40px;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-size: 20px;
+}
+
+.questionP {
+  margin-top: 10px;
+  margin-left: 20px;
+  left: 83px;
+  width: 800px;
+}
+
+.questionIcon {
+  margin-left: 10px;
+  float: left;
+  margin-bottom: 10px;
+}
+
+.LikeCount {
+  float: left;
+  border: 2px solid #000000;
+  height: 31px;
+  width: 31px;
+  border-left: transparent;
+  text-align: center;
+}
+
+.Answers {
+  float: left;
+  margin-left: 30px;
+}
+
+.Tags {
+  float: left;
+  margin-left: 20px;
+}
+
+.LinkTags {
+  float: left;
+  margin-left: 10px;
+}
+
+.popular {
+  margin-left: 20px;
+  width: 420px;
+  height: 400px;
+  font-family: cursive;
+}
+
+.bestMembers {
+  margin-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 10vh;
+}
+
+.dark {
+  border: medium none;
+  background-image: none;
+  background: transparent;
+  float: left;
+  background-color: transparent;
+  height: 40px;
+}
+
+.str {
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-bottom: 10vh;
+}
+
+.title {
+  position: relative;
+  width: 1000%;
+  margin-left: 50px;
+}
+
+input.textTitle {
+  width: 800px;
+  border: 2px solid #000000;
+  background-color: #f2f3f4;
+
+}
+
+textarea  {
+  border: 2px solid #000000;
+  width: 800px;
+  height: 300px;
+  margin-left: 35px;
+  resize: none;
+  background-color: #f2f3f4;
+}
+
+.answer {
+  background-color: #f2f3f4;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  width: 900px;
+  display: inline-table;
+  height: auto;
+  margin-left: 50px;
+  margin-bottom: 15px;
+}
+
+.input {
+  margin-left: 40px;
+  float: left;
+  border: 2px solid #000000;
+
+}
+
+.questionTextarea {
+  margin-top: 15px;
+  margin-left: 50px;
+  width: 900px;
+  height: 150px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.answerButton {
+  margin-left: 50px;
+  margin-top: 15px;
+  margin-bottom: 8vh;
+}
+
+.Textsettings {
+  margin-left: 50px;
+  float: left;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.TextareaSettings {
+  position: absolute;
+  right: 700px;
+  width: 200px;
+  height: 31px;
+  background-color: #f2f3f4;
+  border: 2px solid #000000;
+}
+
+.avatarSettings {
+  border: 2px solid #000000;
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-left: 24px;
+}
+
+.LogText {
+  color: red;
+  margin-left: 50px;
+}
