@@ -22,13 +22,17 @@ ANSWERS = [
 # Create your views here.
 def index(request):
     page = request.GET.get('page', 1)
-    return render(request, template_name="index.html", context={'questions': paginate(QUESTIONS, page)})
+    paginator = paginate(QUESTIONS, page)
+    page_obj = paginator.get_page(page)
+    return render(request, template_name="index.html", context={'page_obj': page_obj})
 
 
 def tag(request, tag_name):
     item = tag_name
     page = request.GET.get('page', 1)
-    return render(request, template_name="tag.html", context={'tag': item, 'questions': paginate(QUESTIONS, page)})
+    paginator = paginate(QUESTIONS, page)
+    page_obj = paginator.get_page(page)
+    return render(request, template_name="tag.html", context={'tag': item, 'page_obj': page_obj})
 
 
 def question(request, question_id):
@@ -37,7 +41,9 @@ def question(request, question_id):
     else:
         item = QUESTIONS[0]
     page = request.GET.get('page', 1)
-    return render(request, template_name="question.html", context={'question': item, 'answers': paginate(ANSWERS, page)})
+    paginator = paginate(ANSWERS, page, 5)
+    page_obj = paginator.get_page(page)
+    return render(request, template_name="question.html", context={'question': item, 'page_obj': page_obj, 'count': ANSWERS})
 
 
 def ask(request):
@@ -58,9 +64,11 @@ def signup(request):
 
 def hot(request):
     page = request.GET.get('page', 1)
-    return render(request, template_name="hot.html", context={'questions': paginate(QUESTIONS, page)})
+    paginator = paginate(ANSWERS, page, 5)
+    page_obj = paginator.get_page(page)
+    return render(request, template_name="hot.html", context={'page_obj': page_obj})
 
 
 def paginate(objects, page, per_page=15):
     paginator = Paginator(objects, per_page)
-    return paginator.page(page)
+    return paginator

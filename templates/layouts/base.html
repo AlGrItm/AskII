@@ -167,13 +167,13 @@
   <div class="split right">
    <div class="popular d-grid gap-2">
     <h3>Popular tags</h3>
-    <button type="button" class="btn btn-primary">perl</button>
-    <button type="button" class="btn btn-secondary">python</button>
-    <button type="button" class="btn btn-success">technopark</button>
-    <button type="button" class="btn btn-danger">mySQL</button>
-    <button type="button" class="btn btn-warning">django</button>
-    <button type="button" class="btn btn-info">Marl.ru</button>
-    <button type="button" class="btn btn-dark">Voloshin</button>
+    <button onclick="document.location='{% url 'tag' "perl" %}'" type="button" class="btn btn-primary">perl</button>
+    <button onclick="document.location='{% url 'tag' "python" %}'" type="button" class="btn btn-secondary">python</button>
+    <button onclick="document.location='{% url 'tag' "technopark" %}'" type="button" class="btn btn-success">technopark</button>
+    <button onclick="document.location='{% url 'tag' "mySQL" %}'" type="button" class="btn btn-danger">mySQL</button>
+    <button onclick="document.location='{% url 'tag' "django" %}'" type="button" class="btn btn-warning">django</button>
+    <button onclick="document.location='{% url 'tag' "Mail.ru" %}'" type="button" class="btn btn-info">Mail.ru</button>
+    <button onclick="document.location='{% url 'tag' "Voloshin" %}'" type="button" class="btn btn-dark">Voloshin</button>
    </div>
    <div class="bestMembers">
     <h3>Best members</h3>

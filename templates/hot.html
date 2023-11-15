@@ -11,7 +11,7 @@
         <h3>Hot Questions</h3>
       </li>
     </ul>
-    {% for question in questions %}
+    {% for question in page_obj %}
         {% include 'components/question-item.html' %}
     {% endfor %}
     {% include 'components/pagination.html' %}

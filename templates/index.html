@@ -11,10 +11,10 @@
         <h3>New Questions</h3>
       </li>
       <li class="NIZ">
-        <button type="button" class="btn btn-warning ser">Hot questions!</button>
+        <button onclick="document.location='{% url 'hot' %}'" type="button" class="btn btn-warning ser">Hot questions!</button>
       </li>
     </ul>
-    {% for question in questions %}
+    {% for question in page_obj %}
         {% include 'components/question-item.html' %}
     {% endfor %}
     {% include 'components/pagination.html' %}

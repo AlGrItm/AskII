@@ -8,7 +8,7 @@
 {% block content %}
     {% include 'components/question-item.html' %}
     <hr style="width: 900px; margin-left: 50px;">
-    {% for answer in answers %}
+    {% for answer in page_obj %}
         {% include 'components/answer-item.html' %}
     {% endfor %}
 
