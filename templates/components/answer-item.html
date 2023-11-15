@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class="answer">
+    <img class="questionPhoto" src="{% static '/Images/Hombre.jpg' %}" alt="Avatar" width="40" height="40"  class="avatar">
+    <p class="questionP">{{ answer.content }}</p>
+    <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
+    <div class="LikeCount">1</div>
+    <input class="form-check-input input" type="checkbox" id="inlineCheckbox1" value="option1">
+    <p style="float: left; margin-left: 10px">Correct!</p>
+</div>

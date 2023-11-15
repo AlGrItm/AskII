@@ -1,8 +1,8 @@
+{%  load static %}
 
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-  <head><script src="/docs/5.3/assets/js/color-modes.js"></script>
-
+  <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -89,7 +89,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="../static/main.css" rel="stylesheet">
+    <link href="{% static '/main.css' %}" rel="stylesheet">
   </head>
   <body class="d-flex flex-column h-100">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -139,7 +139,7 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">AskII</a>
+      <a class="navbar-brand" href="{% url 'index' %}">AskII</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -149,21 +149,8 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Ask!</a>
-          </li>
-          <li class="nav-item">
-              <img src="../static/Images/Hombre.jpg" alt="Avatar." width="40" height="40"  class="avatar">
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Name</a>
-          </li>
-          <li>
-            <button class="dark"><i style="color:white;" class="bi bi-gear-fill"></i></button>
-          </li>
-          <li>
-            <button class="dark"><i style="color:white;" class="bi bi-box-arrow-right"></i></button>
-          </li>
+            {% block nav %}
+            {% endblock %}
         </ul>
       </div>
     </div>
@@ -173,44 +160,8 @@
 <!-- Begin page content -->
 <main class="flex-shrink-0">
   <div class="split left">
-    <ul class="wrapper">
-      <li>
-        <h3>New Questions</h3>
-      </li>
-      <li class="NIZ">
-        <button type="button" class="btn btn-warning ser">Hot questions!</button>
-      </li>
-    </ul>
-    <div class="question">
-      <img class="questionPhoto" src="../static/Images/Hombre.jpg" alt="Avatar." width="40" height="40"  class="avatar">
-      <a class="questionHref" href="url">How to build a moon park?</a>
-      <p class="questionP">
-          Multirotor drones have been revolutionary with their vertical
-        takeoff and landing capabilities. Because of their maneuverability, they can be used in a variety of applications such as
-        agriculture, disaster relief, and, most notably for the context
-        of this project, delivery. Especially since drones can navigate
-        through neighborhoods with a high degree of precision, they
-        serve as an effective alternative to traditional parcel carriers
-        for last-mile delivery. The ability to control inexpensive drones
-        without the need for human supervision provides the promise
-        of faster and cheaper shipments for many [10].
-      </p>
-      <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
-      <p class="LikeCount">1</p>
-      <a class="Answers" href="url">Answer(3)</a>
-      <p class="Tags">Tags:</p>
-      <div class="LinkTags">
-        <a href="url">Tag One</a>
-        <a href="url">Tag Two</a>
-      </div>
-    </div>
-    <div class="btn-group me-2 str" role="group" aria-label="Second group">
-      <button type="button" class="btn btn-secondary">1</button>
-      <button type="button" class="btn btn-secondary">2</button>
-      <button type="button" class="btn btn-secondary">3</button>
-      <button type="button" class="btn btn-secondary">...</button>
-      <button type="button" class="btn btn-secondary">60</button>
-    </div>
+      {% block content %}
+      {% endblock %}
   </div>
 
   <div class="split right">

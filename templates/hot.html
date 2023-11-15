@@ -2,22 +2,17 @@
 {% load static %}
 
 {% block nav %}
-    {% include 'components/profile_nav.html' %}
+    {% include 'components/common_nav.html' %}
 {% endblock %}
 
 {% block content %}
-<ul class="wrapper">
-    <li>
-        <h3>Tag: </h3>
-    </li>
-    <li class="Tags">
-        <h3>{{ tag }}</h3>
-    </li>
-</ul>
+    <ul class="wrapper">
+      <li>
+        <h3>Hot Questions</h3>
+      </li>
+    </ul>
     {% for question in questions %}
         {% include 'components/question-item.html' %}
     {% endfor %}
-
     {% include 'components/pagination.html' %}
-
 {% endblock %}

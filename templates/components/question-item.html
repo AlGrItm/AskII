@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="question">
+    <img class="questionPhoto" src="{% static '/Images/Hombre.jpg' %}" alt="Avatar." width="40" height="40"  class="avatar">
+    <a class="questionHref" href="{% url 'question' question.id %}">{{ question.title }}</a>
+    <p class="questionP">{{ question.content }}</p>
+    <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
+    <p class="LikeCount">1</p>
+    <a class="Answers" href="url">Answer(3)</a>
+    <p class="Tags">Tags:</p>
+    <div class="LinkTags">
+        <a href="Tag One">Tag One</a>
+        <a href="Tag Two">Tag Two</a>
+    </div>
+</div>
