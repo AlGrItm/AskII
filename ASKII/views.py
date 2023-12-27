@@ -1,49 +1,31 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question {i}',
-        'content': f'ABOBA ABOBA AAA BBBOOO BBBAAA {i}'
-    } for i in range(100)
-]
-
-ANSWERS = [
-    {
-        'id': i,
-        'title': f'Answer {i}',
-        'content': f'IOUIIOOU UUIOIOIUIOU IOU IOIOIOUUOOI'
-    } for i in range(30)
-]
-
+from ASKII import models
 
 # Create your views here.
+
+
 def index(request):
-    page = request.GET.get('page', 1)
-    paginator = paginate(QUESTIONS, page)
-    page_obj = paginator.get_page(page)
+    questions = models.Question.objects.new_questions()
+    page_obj = paginate(questions, request)
     return render(request, template_name="index.html", context={'page_obj': page_obj})
 
 
 def tag(request, tag_name):
-    item = tag_name
-    page = request.GET.get('page', 1)
-    paginator = paginate(QUESTIONS, page)
-    page_obj = paginator.get_page(page)
-    return render(request, template_name="tag.html", context={'tag': item, 'page_obj': page_obj})
+    questions = models.Question.objects.tag_questions(tag_name)
+    page_obj = paginate(questions, request)
+    return render(request, template_name="tag.html", context={'page_obj': page_obj, 'tg': tag_name})
 
 
 def question(request, question_id):
-    if question_id.isdigit():
-        item = QUESTIONS[int(question_id)]
-    else:
-        item = QUESTIONS[0]
-    page = request.GET.get('page', 1)
-    paginator = paginate(ANSWERS, page, 5)
-    page_obj = paginator.get_page(page)
-    return render(request, template_name="question.html", context={'question': item, 'page_obj': page_obj, 'count': ANSWERS})
+    try:
+        question = models.Question.objects.get(pk=question_id)
+    except models.Question.DoesNotExist:
+        return HttpResponse("Запрошенный вопрос не найден", status=404)
+    answers = models.Answer.objects.answer_info(question_id)
+    page_obj = paginate(answers, request, 5)
+    return render(request, template_name="question.html", context={'question': question, 'page_obj': page_obj})
 
 
 def ask(request):
@@ -63,12 +45,20 @@ def signup(request):
 
 
 def hot(request):
-    page = request.GET.get('page', 1)
-    paginator = paginate(ANSWERS, page, 5)
-    page_obj = paginator.get_page(page)
+    questions = models.Question.objects.hot_questions()
+    page_obj = paginate(questions, request)
     return render(request, template_name="hot.html", context={'page_obj': page_obj})
 
 
-def paginate(objects, page, per_page=15):
+def profile(request, profile_id):
+    profile = models.Profile.objects.get(pk=profile_id)
+    questions = models.Question.objects.profile_questions(profile_id)
+    page_obj = paginate(questions, request)
+    return render(request, template_name="profile.html", context={'page_obj': page_obj, 'profile': profile})
+
+
+def paginate(objects, request, per_page=15):
     paginator = Paginator(objects, per_page)
-    return paginator
+    page = request.GET.get('page', 1)
+    page_obj = paginator.page(page)
+    return page_obj

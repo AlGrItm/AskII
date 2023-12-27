@@ -1,15 +1,16 @@
 {% load static %}
 
 <div class="question">
-    <img class="questionPhoto" src="{% static '/Images/Hombre.jpg' %}" alt="Avatar." width="40" height="40"  class="avatar">
+    <img class="questionPhoto" src="{{ question.author.avatar.url }}" alt="Avatar." width="40" height="40"  class="avatar">
     <a class="questionHref" href="{% url 'question' question.id %}">{{ question.title }}</a>
-    <p class="questionP">{{ question.content }}</p>
+    <p class="questionP">{{ question.text }}</p>
     <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
-    <p class="LikeCount">1</p>
-    <a class="Answers" href="{% url 'question' question.id %}">Answer 30</a>
+    <p class="LikeCount">{{ question.likes.all.count }}</p>
+    <a class="Answers" href="{% url 'question' question.id %}">Answer {{ question.answers.all.count }}</a>
     <p class="Tags">Tags:</p>
     <div class="LinkTags">
-        <a href="{% url 'tag' "Tag One" %}">Tag One</a>
-        <a href="{% url 'tag' "Tag Two"  %}">Tag Two</a>
+        {% for tag in question.tag.all %}
+            <a href="{% url 'tag' tag.title %}">{{ tag }}</a>
+        {% endfor %}
     </div>
 </div>

@@ -27,4 +27,5 @@ urlpatterns = [
     path('question/<question_id>', views.question, name='question'),
     path('hot', views.hot, name='hot'),
     path('admin/', admin.site.urls),
+    path('profile/<int:profile_id>/', views.profile, name='profile'),
 ]

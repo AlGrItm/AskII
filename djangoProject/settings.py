@@ -64,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ASKII.context_processors.tags',
+                'ASKII.context_processors.profiles',
             ],
         },
     },
@@ -77,8 +79,12 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'App',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 

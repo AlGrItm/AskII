@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block nav %}
+    {% include 'components/profile_nav.html' %}
+{% endblock %}
+
+{% block content %}
+<ul class="wrapper">
+    <li>
+        <h3>Profile: </h3>
+    </li>
+    <li class="Tags">
+        <h3>{{ profile }}</h3>
+    </li>
+</ul>
+    {% for question in page_obj %}
+        {% include 'components/question-item.html' %}
+    {% endfor %}
+
+    {% include 'components/pagination.html' %}
+
+{% endblock %}

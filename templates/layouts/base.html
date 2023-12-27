@@ -167,23 +167,15 @@
   <div class="split right">
    <div class="popular d-grid gap-2">
     <h3>Popular tags</h3>
-    <button onclick="document.location='{% url 'tag' "perl" %}'" type="button" class="btn btn-primary">perl</button>
-    <button onclick="document.location='{% url 'tag' "python" %}'" type="button" class="btn btn-secondary">python</button>
-    <button onclick="document.location='{% url 'tag' "technopark" %}'" type="button" class="btn btn-success">technopark</button>
-    <button onclick="document.location='{% url 'tag' "mySQL" %}'" type="button" class="btn btn-danger">mySQL</button>
-    <button onclick="document.location='{% url 'tag' "django" %}'" type="button" class="btn btn-warning">django</button>
-    <button onclick="document.location='{% url 'tag' "Mail.ru" %}'" type="button" class="btn btn-info">Mail.ru</button>
-    <button onclick="document.location='{% url 'tag' "Voloshin" %}'" type="button" class="btn btn-dark">Voloshin</button>
+       {% for tag in tags %}
+           <button onclick="document.location='{% url 'tag' tag %}'" type="button" class="btn btn-primary">{{ tag }}</button>
+       {% endfor %}
    </div>
    <div class="bestMembers">
     <h3>Best members</h3>
-    <p><a href="#" class="link-primary">Mr. Freeman</a></p>
-    <p><a href="#" class="link-secondary">Dr. House</a></p>
-    <p><a href="#" class="link-success">Bender</a></p>
-    <p><a href="#" class="link-warning">Queen Victoria</a></p>
-    <p><a href="#" class="link-info">V Pupkin</a></p>
-    <p><a href="#" class="link-dark">Lomonosov</a></p>
-    <p><a href="#" class="link-body-emphasis">Tayler Derden</a></p>
+       {% for profile in profiles %}
+           <p><a href="{% url 'profile' profile.user.id %}" class="link-primary">{{ profile }}</a></p>
+       {% endfor %}
    </div>
   </div>
 </main>
