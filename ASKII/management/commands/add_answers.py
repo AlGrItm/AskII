@@ -14,7 +14,7 @@ class Command(BaseCommand):
         questions = Question.objects.all()
 
         answers_to_create = []
-        for _ in range(50):
+        for _ in range(100000):
             answer = Answer(
                 correct=random.choice([True, False]),
                 text=fake.text(),

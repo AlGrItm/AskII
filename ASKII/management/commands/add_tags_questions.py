@@ -15,10 +15,13 @@ class Command(BaseCommand):
 
         profiles = Profile.objects.all()
 
-        for _ in range(20):
+        for _ in range(1000000):
+            #tag_title = fake.word()
+            #tag = Tag.objects.create(title=tag_title)
+
             question = Question.objects.create(
-                title=fake.sentence(nb_words=random.randint(5, 50), question_mark=True),
-                text=fake.text(nb_words=random.randint(5, 150)),
+                title=fake.sentence(),
+                text=fake.text(),
                 author=random.choice(profiles),
                 creation_data=fake.date_time()
             )

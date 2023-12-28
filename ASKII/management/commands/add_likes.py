@@ -14,7 +14,7 @@ class Command(BaseCommand):
         answer_likes_to_create = []
         question_likes_to_create = []
 
-        for _ in range(50):
+        for _ in range(1500000):
 
             answer_like = AnswerLike(
                 author=random.choice(profiles),
