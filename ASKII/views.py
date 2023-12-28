@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from ASKII import models
+from django.http import Http404
 
 # Create your views here.
 
@@ -62,3 +63,7 @@ def paginate(objects, request, per_page=15):
     page = request.GET.get('page', 1)
     page_obj = paginator.page(page)
     return page_obj
+
+
+def page_not_found(request, exception):
+    return render(request, 'not_existed.html', status=404)

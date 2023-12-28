@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ASKII import views
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('ask', views.ask, name='ask'),
@@ -29,3 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/<int:profile_id>/', views.profile, name='profile'),
 ]
+
+handler404 = 'ASKII.views.page_not_found'
