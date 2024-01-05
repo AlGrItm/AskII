@@ -40,7 +40,7 @@ class QuestionManager(models.Manager):
     def get_queryset(self):
         return QuestionQuerySet(self.model, using=self.db)
 
-    def new_questions(self):
+    def new_questions(self, page_number=1, per_page=15):
         return self.get_queryset().question_info().order_by('-creation_data')
 
     def hot_questions(self):

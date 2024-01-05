@@ -7,3 +7,7 @@ def tags(request):
 
 def profiles(request):
     return {'profiles': Profile.objects.top_users()}
+
+
+def authenticated(request):
+    return {'authenticated': request.user.is_authenticated}

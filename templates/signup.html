@@ -1,8 +1,6 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
-{% block nav %}
-    {% include 'components/common_nav.html' %}
-{% endblock %}
 
 {% block content %}
 <ul class="wrapper">
@@ -10,25 +8,9 @@
         <h3>Registration</h3>
     </li>
 </ul>
-    <p class="LogText">Sorry, this email adress was already registred!</p>
-    <p class="Textsettings">Login</p>
-    <input type="text" class="TextareaSettings"></input>
-    <br><br>
-    <p class="Textsettings">Email</p>
-    <input class="TextareaSettings" type="password"></input>
-    <br><br>
-    <p class="Textsettings">NickName</p>
-    <input class="TextareaSettings" type="password"></input>
-    <br><br>
-    <p class="Textsettings">Password</p>
-    <input class="TextareaSettings" type="password"></input>
-    <br><br>
-    <p class="Textsettings">Repeat password</p>
-    <input class="TextareaSettings" type="password"></input>
-    <br><br>
-    <p class="Textsettings">Upload avatar</p>
-    <img src="{% static '/Images/Hombre.jpg' %}" alt="Avatar"  class="avatarSettings">
-    <input style="margin-left: 20px; border: 1px solid #000000;" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple/>
-    <br><br>
-    <button type="button" class="btn btn-secondary" style="left: 170px; position: absolute;">Register</button>
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-secondary" style="margin-left: 20px; margin-bottom: 10vh; margin-top: 10px;">Register</button>
+</form>
 {% endblock %}

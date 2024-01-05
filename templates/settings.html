@@ -1,9 +1,6 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
-
-{% block nav %}
-    {%  include 'components/profile_nav.html' %}
-{% endblock %}
 
 {%  block content %}
 <ul class="wrapper">
@@ -11,21 +8,12 @@
         <h3>Settings: </h3>
     </li>
     <li class="Tags">
-        <h3>Dr. Pepper</h3>
+        <h3>{{ request.user.username }}</h3>
     </li>
 </ul>
-    <p class="Textsettings">Login</p>
-    <input type="text" class="TextareaSettings"></input>
-    <br><br>
-    <p class="Textsettings">Email</p>
-    <input type="text" class="TextareaSettings"></input>
-    <br><br>
-    <p class="Textsettings">NickName</p>
-    <input type="text" class="TextareaSettings"></input>
-    <br><br>
-    <p class="Textsettings">Upload avatar</p>
-    <img src="{% static '/Images/Hombre.jpg' %}" alt="Avatar"  class="avatarSettings">
-    <input style="margin-left: 20px; border: 1px solid #000000;" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple/>
-    <br><br>
-    <button type="button" class="btn btn-secondary" style="left: 170px; position: absolute;">Save</button>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-secondary" style="margin-left: 20px; margin-bottom: 10vh; margin-top: 10px;">Save</button>
+    </form>
 {% endblock %}

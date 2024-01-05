@@ -156,7 +156,6 @@ input.textTitle {
   width: 800px;
   border: 2px solid #000000;
   background-color: #f2f3f4;
-
 }
 
 textarea  {
@@ -202,12 +201,12 @@ textarea  {
 }
 
 .Textsettings {
+    position: absolute;
   margin-left: 50px;
   float: left;
   font-family: 'Times New Roman', Times, serif;
   font-size: large;
   margin-bottom: 20px;
-  display: block;
 }
 
 .TextareaSettings {

@@ -1,7 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% block nav %}
-    {% include 'components/common_nav.html' %}
-{% endblock %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <ul class="wrapper">
@@ -9,14 +7,11 @@
         <h3>Log in</h3>
     </li>
 </ul>
-    <p class="LogText">Sorry, wrong password!</p>
-    <p class="Textsettings">Login</p>
-    <input type="text" class="TextareaSettings"></input>
-    <br><br>
-    <p class="Textsettings">Password</p>
-    <input class="TextareaSettings" type="password"></input>
-    <br><br>
-    <button type="button" class="btn btn-secondary" style="left: 175px; position: absolute;">Log in!</button>
-    <br><br>
-    <a style="margin-left: 175px;"href="url">create new account</a>
+    <form method="post">
+    {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-secondary" style="left: 25px; position: absolute;">Log in!</button>
+        <br><br>
+        <a style="margin-left: 25px;"href="{% url 'signup' %}">create new account</a>
+    </form>
 {% endblock %}

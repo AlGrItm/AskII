@@ -1,8 +1,5 @@
 {% extends 'layouts/base.html' %}
-
-{% block nav %}
-    {% include 'components/common_nav.html' %}
-{% endblock %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <div class="split left">
@@ -11,14 +8,15 @@
         <h3>New Questions</h3>
       </li>
     </ul>
-    <form class="title">
-        <label>Title</label>
-        <input type="text" class="textTitle" name=""/><br><br>
-        <label style="position:fixed; margin-top: 3px;">Text</label>
-        <textarea></textarea><br><br>
-        <label>Tags</label>
-        <input type="text" class="textTitle" name=""/><br><br>
-        <button type="button" class="btn btn-info">ASK!</button>
+    <form class="title" method="post">
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <input type="text" class="textTitle" id="title" name="title"/><br><br>
+        <label for="text" style="position:fixed; margin-top: 3px;">Text</label>
+        <textarea id="text" name="text"></textarea><br><br>
+        <label for="tags">Tags</label>
+        <input id="tags" type="text" class="textTitle" name="tags"/><br><br>
+        <button type="submit" class="btn btn-info">ASK!</button>
     </form>
 </div>
 {% endblock %}

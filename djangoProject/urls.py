@@ -22,13 +22,14 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('ask', views.ask, name='ask'),
     path('settings', views.settings, name='settings'),
-    path('login', views.login, name='login'),
-    path('signup', views.signup, name='signup'),
+    path('login/', views.log_in, name='login'),
+    path('signup/', views.signup, name='signup'),
     path('tag/<tag_name>', views.tag, name='tag'),
     path('question/<question_id>', views.question, name='question'),
     path('hot', views.hot, name='hot'),
     path('admin/', admin.site.urls),
     path('profile/<int:profile_id>/', views.profile, name='profile'),
+    path('logout/', views.logout, name='logout'),
 ]
 
-handler404 = 'ASKII.views.page_not_found'
+handler404 = "ASKII.views.page_not_found"

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ASKII.apps.AskiiConfig',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'ASKII.context_processors.tags',
                 'ASKII.context_processors.profiles',
+                'ASKII.context_processors.authenticated',
             ],
         },
     },
