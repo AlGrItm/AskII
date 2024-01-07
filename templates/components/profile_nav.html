@@ -4,10 +4,10 @@
     <a class="nav-link" href="{% url 'ask' %}">Ask!</a>
 </li>
 <li class="nav-item">
-    <img src="{% static '/Images/Hombre.jpg' %}" alt="Avatar" width="40" height="40"  class="avatar">
+    <img src=" {{ request.user.profile.avatar.url }}" alt="Avatar" width="40" height="40"  class="avatar">
 </li>
 <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="{% url 'settings' %}">{{ request.user.username }}</a>
+    <a class="nav-link" aria-current="page" href="{% url 'profile' request.user.id %}">{{ request.user.username }}</a>
 </li>
 <li>
     <button onclick="document.location='{% url 'settings' %}'" class="dark"><i style="color:white;" class="bi bi-gear-fill"></i></button>

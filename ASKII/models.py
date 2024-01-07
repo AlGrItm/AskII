@@ -40,7 +40,7 @@ class QuestionManager(models.Manager):
     def get_queryset(self):
         return QuestionQuerySet(self.model, using=self.db)
 
-    def new_questions(self, page_number=1, per_page=15):
+    def new_questions(self):
         return self.get_queryset().question_info().order_by('-creation_data')
 
     def hot_questions(self):
@@ -98,7 +98,7 @@ class AnswerManager(models.Manager):
 
 
 class Answer(models.Model):
-    correct = models.BooleanField(default='false')
+    correct = models.BooleanField(default=False)
     text = models.CharField(max_length=300)
     author = models.ForeignKey('Profile', on_delete=models.PROTECT)
     question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='answers')

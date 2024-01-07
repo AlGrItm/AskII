@@ -588,3 +588,7 @@ img {
 .theme-btn-s4:active {
     color: #fff;
 }
+
+.btn-custom {
+    height: 10px;
+}

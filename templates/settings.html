@@ -3,6 +3,7 @@
 {% load static %}
 
 {%  block content %}
+
 <ul class="wrapper">
     <li>
         <h3>Settings: </h3>
@@ -11,9 +12,48 @@
         <h3>{{ request.user.username }}</h3>
     </li>
 </ul>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li style="color: darkgreen">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-secondary" style="margin-left: 20px; margin-bottom: 10vh; margin-top: 10px;">Save</button>
+        <label for="username" class="Textsettings">username</label>
+        <input type="text" class="TextareaSettings" id="username" name="username" value="{{ request.user.username }}"></input>
+        <br>
+        {{ form.username.errors }}
+        <br>
+        <label for="password" class="Textsettings">password</label>
+        <input type="password" class="TextareaSettings" id="password" name="password"></input>
+        <br>
+        {{ form.password.errors }}
+        <br>
+        <label for="password_check" class="Textsettings">password check</label>
+        <input type="password" class="TextareaSettings" id="password_check" name="password_check"></input>
+        <br>
+        {{ form.password_check.errors }}
+        <br>
+        <label for="last_name" class="Textsettings">last name</label>
+        <input type="text" class="TextareaSettings" id="last_name" name="last_name" value="{{ request.user.last_name }}"></input>
+        <br>
+        {{ form.last_name.errors }}
+        <br>
+        <label for="first_name" class="Textsettings">first name</label>
+        <input type="text" class="TextareaSettings" id="first_name" name="first_name" value="{{ request.user.first_name }}"></input>
+        <br>
+        {{ form.first_name.errors }}
+        <br>
+        <label for="email" class="Textsettings">email</label>
+        <input type="email" class="TextareaSettings" id="email" name="email" value="{{ request.user.email }}"></input>
+        <br>
+        {{ form.email.errors }}
+        <br><br>
+        <img src="{{ request.user.profile.avatar.url }}" alt="Avatar"  class="avatarSettings">
+        <input style="margin-left: 20px; border: 1px solid #000000;" type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" multiple/>
+        <br><br>
+        <button type="submit" class="btn btn-secondary" style="left: 170px; position: absolute; margin-bottom: 10vh; margin-top: 10px;">Save</button>
     </form>
 {% endblock %}

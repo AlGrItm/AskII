@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -31,9 +31,14 @@ def question(request, question_id):
     try:
         question = models.Question.objects.get(pk=question_id)
     except models.Question.DoesNotExist:
-        return HttpResponse("Запрошенный вопрос не найден", status=404)
+        return render(request, template_name="not_existed.html")
     answers = models.Answer.objects.answer_info(question_id)
     page_obj = paginate(answers, request, 5)
+    if request.method == "POST":
+        answer_form = forms.AnswerForm(request.POST, question=question)
+        if answer_form.is_valid():
+            answer_form.save(request)
+            return redirect(reverse('question', kwargs={'question_id': question_id}) + f'?page={page_obj.paginator.num_pages}')
     return render(request, template_name="question.html", context={'question': question, 'page_obj': page_obj})
 
 
@@ -79,18 +84,16 @@ def signup(request):
 def settings(request):
     user = request.user
     profile = get_object_or_404(models.Profile, user=user)
-
     if request.method == 'POST':
         settings_form = forms.SettingsForm(request.POST, request.FILES, instance=profile)
-        if settings_form.is_valid():
-            settings_form.save(user=user)
-            return render(request, template_name="settings.html", context={'form': settings_form})
+        profile_form = forms.ProfileSettingsForm(request.POST, request.FILES, instance=profile)
+        if settings_form.is_valid() and profile_form.is_valid():
+            settings_form.save(user=user, request=request)
+            profile_form.save(profile=profile)
+            messages.success(request, 'Your settings have been successfully updated.')
+            return redirect(reverse('settings'))
     else:
-        initial_data = {
-            'username': user.username,
-            'last_name': user.last_name,
-            'first_name': user.first_name,
-        }
+        initial_data = {'username': user.username, 'last_name': user.last_name, 'first_name': user.first_name}
         settings_form = forms.SettingsForm(initial=initial_data, instance=profile)
     return render(request, template_name="settings.html", context={'form': settings_form})
 
@@ -99,14 +102,10 @@ def settings(request):
 def ask(request):
     if request.method == "POST":
         ask_form = forms.AskForm(request.POST)
-        print(ask_form)
         if ask_form.is_valid():
             new_question = ask_form.save(request=request)
-            return render(request, template_name="question.html", context={'question': new_question})
-        else:
-            print("Not valid")
+            return redirect('question', question_id=new_question.id)
     else:
-        print("Not POST")
         ask_form = forms.AskForm()
     return render(request, template_name="ask.html", context={'form': ask_form})
 

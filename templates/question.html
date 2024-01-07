@@ -11,7 +11,10 @@
     {% include 'components/pagination.html' %}
 
   <hr style="width: 900px; margin-left: 50px;">
-
-  <textarea class="questionTextarea">Enter your answer here...</textarea>
-  <button type="button" class="btn btn-secondary answerButton">Answer!</button>
+    <form method="post">
+        {% csrf_token %}
+        <textarea id="text" name="text" class="questionTextarea"></textarea>
+        <input type="hidden" name="question_id" value="{{ question.id }}">
+        <button type="submit" class="btn btn-secondary answerButton">Answer!</button>
+    </form>
 {% endblock %}

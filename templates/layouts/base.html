@@ -146,10 +146,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+
+          <input class="form-control me-2" name="tag" id="tag" type="search" style="width: auto;" placeholder="Search" aria-label="Search">
+          <button onclick="searchByTag()" class="btn btn-outline-success" type="submit">Search</button>
+
+      <script>
+          function searchByTag() {
+              let tagValue = document.getElementById('tag').value.trim();
+              if (tagValue !== '') {
+                  window.location.href = '/tag/' + encodeURIComponent(tagValue);
+              } else {
+                  window.location.href = '/tag/ask'
+              }
+          }
+      </script>
+
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             {% if authenticated %}
                 {%  include 'components/profile_nav.html' %}

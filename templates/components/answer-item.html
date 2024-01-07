@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="answer">
-    <img class="questionPhoto" src="{% static '/Images/Hombre.jpg' %}" alt="Avatar" width="40" height="40"  class="avatar">
+    <img class="questionPhoto" src="{{ answer.author.avatar.url }}" alt="Avatar" width="40" height="40"  class="avatar">
     <p class="questionP">{{ answer.text }}</p>
     <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
     <div class="LikeCount">{{ answer.num_likes }}</div>

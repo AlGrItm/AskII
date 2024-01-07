@@ -10,7 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         avatar_folder = 'static/Images'
 
-        profiles = Profile.objects.filter(avatar='None')
+        profiles = Profile.objects.filter(avatar="None")
+        print(profiles.count())
 
         if profiles.exists():
             avatar_files = os.listdir(avatar_folder)
