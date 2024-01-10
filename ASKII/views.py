@@ -29,7 +29,10 @@ def tag(request, tag_name):
 
 
 def question(request, question_id):
-    question = models.Question.objects.get(pk=question_id)
+    try:
+        question = models.Question.objects.get(pk=question_id)
+    except models.Question.DoesNotExist:
+        return HttpResponse("Запрошенный вопрос не найден", status=404)
     answers = models.Answer.objects.answer_info(question_id)
     page_obj = paginate(answers, request, 5)
     if request.method == "POST":
