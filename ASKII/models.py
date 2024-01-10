@@ -74,7 +74,7 @@ class ProfileManager(models.Manager):
 
 
 class Profile(models.Model):
-    avatar = models.ImageField(null=True, blank=True, upload_to='static/Images')
+    avatar = models.ImageField(null=True, blank=True, default='Hombre.png', upload_to='avatar/')
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     objects = ProfileManager()
 
@@ -112,6 +112,9 @@ class QuestionLike(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE)
     question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='likes')
 
+    class Meta:
+        unique_together = ('author', 'question')
+
     def __str__(self):
         return f'{self.author.user.last_name} {self.author.user.first_name}: {self.question.title}'
 
@@ -119,6 +122,9 @@ class QuestionLike(models.Model):
 class AnswerLike(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE)
     answer = models.ForeignKey('Answer', on_delete=models.CASCADE, related_name='likes')
+
+    class Meta:
+        unique_together = ('author', 'answer')
 
     def __str__(self):
         return f'{self.author.user.last_name} {self.author.user.first_name}: {self.answer.text}'

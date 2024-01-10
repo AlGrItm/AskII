@@ -5,8 +5,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
 
 from ASKII import models
 from ASKII import forms
@@ -28,10 +29,7 @@ def tag(request, tag_name):
 
 
 def question(request, question_id):
-    try:
-        question = models.Question.objects.get(pk=question_id)
-    except models.Question.DoesNotExist:
-        return render(request, template_name="not_existed.html")
+    question = models.Question.objects.get(pk=question_id)
     answers = models.Answer.objects.answer_info(question_id)
     page_obj = paginate(answers, request, 5)
     if request.method == "POST":
@@ -123,6 +121,64 @@ def profile(request, profile_id):
     return render(request, template_name="profile.html", context={'page_obj': page_obj, 'profile': profile})
 
 
+@require_POST
+@login_required()
+def like(request):
+    question_id = request.POST['question_id']
+    question = models.Question.objects.get(id=question_id)
+    author = request.user.profile
+    try:
+        existing_like = models.QuestionLike.objects.get(question=question, author=author)
+        existing_like.delete()
+    except models.QuestionLike.DoesNotExist:
+        like = models.QuestionLike.objects.create(question=question, author=author)
+        like.save()
+    return JsonResponse({
+        'status': 'ok',
+        'likes_count': question.likes.all().count()
+    })
+
+
+@require_POST
+@login_required()
+def like_answer(request):
+    answer_id = request.POST['answer_id']
+    answer = models.Answer.objects.get(id=answer_id)
+    print(answer_id)
+    author = request.user.profile
+    try:
+        existing_like = models.AnswerLike.objects.get(answer=answer, author=author)
+        existing_like.delete()
+    except models.AnswerLike.DoesNotExist:
+        like = models.AnswerLike.objects.create(answer=answer, author=author)
+        like.save()
+    return JsonResponse({
+        'status': 'ok',
+        'likes_count': answer.likes.all().count()
+    })
+
+
+@require_POST
+@login_required()
+def correct_answer(request):
+    if request.method == 'POST':
+        answer_id = request.POST.get('answer_id')
+        answer = get_object_or_404(models.Answer, id=answer_id)
+        if request.user.profile == answer.question.author:
+            new_value = not answer.correct
+            answer.correct = new_value
+            answer.save()
+            return JsonResponse({
+                'status': 'ok',
+                'new_value': new_value
+            })
+        else:
+            return JsonResponse({'status': 'error', 'message': 'You are not authorized to change this answer.'},
+                                status=403)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request.'}, status=400)
+
+
 def paginate(objects, request, per_page=15):
     paginator = Paginator(objects, per_page)
     page = request.GET.get('page', 1)
@@ -130,5 +186,5 @@ def paginate(objects, request, per_page=15):
     return page_obj
 
 
-def page_not_found(request, exception):
-    return render(request, 'not_existed.html', status=404)
+def error_404(request, exception):
+    return render(request, 'not_existed.html', {}, status=404)

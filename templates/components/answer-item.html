@@ -3,8 +3,14 @@
 <div class="answer">
     <img class="questionPhoto" src="{{ answer.author.avatar.url }}" alt="Avatar" width="40" height="40"  class="avatar">
     <p class="questionP">{{ answer.text }}</p>
-    <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
-    <div class="LikeCount">{{ answer.num_likes }}</div>
-    <input class="form-check-input input" type="checkbox" id="inlineCheckbox1" value="option1">
-    <p style="float: left; margin-left: 10px">Correct!</p>
+    <br>
+    <div style="white-space: nowrap;">
+        <button class="answerIcon" data-id="{{ answer.id }}"><i class="bi bi-hand-thumbs-up"></i></button>
+        <div class="LikeCount">{{ answer.likes.all.count }}</div>
+    </div>
+    <br>
+    <div>
+        <button class="correctIcon" value="Correct!" data-id="{{ answer.id }}"><i class="bi bi-check"></i></button>
+        <p class="AnswerBool">{{ answer.correct }}</p>
+    </div>
 </div>

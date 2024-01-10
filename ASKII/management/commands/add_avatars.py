@@ -5,26 +5,22 @@ from ASKII.models import Profile
 
 
 class Command(BaseCommand):
-    help = 'Fill missing avatars in Profiles with random images from folder'
+    help = 'Set random avatar for profiles with avatar=None'
 
     def handle(self, *args, **kwargs):
-        avatar_folder = 'static/Images'
+        default_avatar_directory = 'avatar/'  # Папка с аватарками
 
-        profiles = Profile.objects.filter(avatar="None")
-        print(profiles.count())
+        # Получаем список всех файлов в папке с аватарками
+        avatar_directory = os.path.join('media', default_avatar_directory)
+        avatars = [os.path.join(default_avatar_directory, f) for f in os.listdir(avatar_directory) if
+                   os.path.isfile(os.path.join(avatar_directory, f))]
 
-        if profiles.exists():
-            avatar_files = os.listdir(avatar_folder)
-            for profile in profiles:
-                if avatar_files:
-                    random_avatar = random.choice(avatar_files)
-                    avatar_path = os.path.join(avatar_folder, random_avatar)
+        profiles_without_avatar = Profile.objects.filter(avatar="None")
+        print(profiles_without_avatar.count())
+        for profile in profiles_without_avatar:
+            if avatars:
+                random_avatar = random.choice(avatars)
+                profile.avatar.name = random_avatar
+                profile.save()
 
-                    profile.avatar = avatar_path
-                    profile.save()
-
-                    avatar_files.remove(random_avatar)
-
-            self.stdout.write(self.style.SUCCESS('Profiles have been updated with avatars'))
-        else:
-            self.stdout.write(self.style.NOTICE('No Profiles without avatars found'))
+        self.stdout.write(self.style.SUCCESS('Random avatar set for profiles without avatar'))

@@ -4,8 +4,10 @@
     <img class="questionPhoto avatar" src="{{ question.author.avatar.url }}" alt="Avatar." width="40" height="40">
     <a class="questionHref" href="{% url 'question' question.id %}">{{ question.title }}</a>
     <p class="questionP">{{ question.text }}</p>
-    <button class="questionIcon"><i class="bi bi-hand-thumbs-up"></i></button>
-    <p class="LikeCount">{{ question.likes.all.count }}</p>
+    <div style="white-space: nowrap;">
+        <button class="questionIcon" data-id="{{ question.id }}"><i class="bi bi-hand-thumbs-up"></i></button>
+        <p class="LikeCount" id="likeCount_{{ question_id }}">{{ question.likes.all.count }}</p>
+    </div>
     <a class="Answers" href="{% url 'question' question.id %}">Answer {{ question.answers.all.count }}</a>
     <p class="Tags">Tags:</p>
     <div class="LinkTags">

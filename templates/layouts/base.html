@@ -195,6 +195,12 @@
    </div>
   </div>
 </main>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="{% static '/javascript/main.js' %}"></script>
+        <script src="{% static '/javascript/answer.js' %}"></script>
+        <script src="{% static '/javascript/correct_answers.js' %}"></script>
+  <script>
+      var csrftoken = '{{ csrf_token }}';
+  </script>
     </body>
 </html>

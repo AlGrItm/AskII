@@ -14,9 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from ASKII import views
+from djangoProject import settings
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -30,6 +32,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/<int:profile_id>/', views.profile, name='profile'),
     path('logout/', views.logout, name='logout'),
+    path('like/', views.like, name='like'),
+    path('like_answer/', views.like_answer, name='like_answer'),
+    path('correct_answer/', views.correct_answer, name='correct_answer'),
 ]
 
-handler404 = "ASKII.views.page_not_found"
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) \
+        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = views.error_404
