@@ -5,7 +5,7 @@ from ASKII.models import Profile
 
 
 class Command(BaseCommand):
-    help = 'Set random avatar for profiles with avatar=None'
+    help = 'Set random avatars for profiles with avatar=None'
 
     def handle(self, *args, **kwargs):
         default_avatar_directory = 'avatar/'  # Папка с аватарками

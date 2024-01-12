@@ -37,8 +37,8 @@ urlpatterns = [
     path('correct_answer/', views.correct_answer, name='correct_answer'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) \
-        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) \
+#        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = views.error_404

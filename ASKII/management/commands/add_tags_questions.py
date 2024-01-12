@@ -10,21 +10,24 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker()
 
-        tags_to_create = [Tag(title=fake.word()) for _ in range(10)]
+        # Создаем набор уникальных слов для тегов
+        unique_tag_titles = set()
+        while len(unique_tag_titles) < 10:
+            unique_tag_titles.add(fake.word())
+
+        tags_to_create = [Tag(title=title) for title in unique_tag_titles]
         created_tags = Tag.objects.bulk_create(tags_to_create)
 
         profiles = Profile.objects.all()
 
         for _ in range(1000000):
-            #tag_title = fake.word()
-            #tag = Tag.objects.create(title=tag_title)
-
             question = Question.objects.create(
                 title=fake.sentence(),
                 text=fake.text(),
                 author=random.choice(profiles),
                 creation_data=fake.date_time()
             )
+
             # Связываем вопросы с несколькими случайными тегами
             random_tags = random.sample(list(created_tags), k=random.randint(1, 3))
             question.tag.add(*random_tags)
